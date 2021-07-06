@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      volatile关键字
+subtitle:   学习笔记-volatile
+date:       2020-07-06
+author:     Leeds
+header-img: img/post-bg-miui6.jpg
+catalog: 	  true
+tags:
+    - 学习资料
+---
+
 ## volatile
 #### 多线程三大特性
 * 原子性
