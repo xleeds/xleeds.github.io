@@ -86,3 +86,44 @@ tags:
 * volatile提供了happens-before保证，对volatile变量v的写入happens-before所有其他线程后续对v的读操作。
 * volatile可以使得long和double的赋值是原子的。
 * volatile可以在单例双重检查中实现可见性和禁止指令重排序，从而保证安全性。
+
+```java 
+/**
+ * volatile 用于双重检查时的例子
+ *
+ */
+public class SingleInstance {
+
+    /**
+     * 因为new对象的操作为：
+     * 1、分配内存空间
+     * 2、调用构造器，初始化实例
+     * 3、返回地址给引用
+     *  其中2和3可能出现指令重排。在多线程环境下，就有可能出现，还未构造完成就返回引用的情况。虽然 singleInstance判断上不为空，但实际
+     *  使用singleInstance中的方法就会NPE。
+     */
+    static volatile SingleInstance singleInstance = null;
+
+    private SingleInstance(){
+
+    }
+
+    /**
+     * 双重检查单例
+     * @return
+     */
+    public static SingleInstance getInstance(){
+        // 第一次检查，没有初始化的才加锁生成。提高了效率。
+        if(Objects.isNull(singleInstance)){
+            synchronized (SingleInstance.class){
+                // 防止出现 多线程时，第一次检查同时为null，重复创建对象。
+                if(Objects.isNull(singleInstance)){
+                    singleInstance = new SingleInstance();
+                }
+            }
+        }
+        return singleInstance;
+    }
+
+}
+```
