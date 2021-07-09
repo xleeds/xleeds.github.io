@@ -89,8 +89,10 @@ tags:
 
 ```java 
 /**
- * volatile 用于双重检查时的例子
+ * volatile 用于双重检查时的例子.
  *
+ * @author Leeds, 2021-07-09
+ * @version Lee v1.0.
  */
 public class SingleInstance {
 
