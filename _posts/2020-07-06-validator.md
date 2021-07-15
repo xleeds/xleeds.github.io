@@ -8,6 +8,7 @@ header-img: img/post-bg-miui6.jpg
 catalog: 	  true
 tags:
     - 学习资料
+    - 多线程
 ---
 
 ## volatile
